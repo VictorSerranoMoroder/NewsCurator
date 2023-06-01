@@ -1,4 +1,5 @@
 #pragma once
+#include "DocumentManager.h"
 
 #include <cstdint>
 #include <iostream>
@@ -11,7 +12,7 @@
 #include <mongocxx/stdx.hpp>
 #include <mongocxx/uri.hpp>
 
-#include "DocumentManager.h"
+
 
 
 bsoncxx::document::value DocumentManager::CreateDocument(std::string input)

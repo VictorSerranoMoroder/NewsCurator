@@ -128,17 +128,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DatabaseConnection.cpp" />
-    <ClCompile Include="DataManager.cpp" />
-    <ClCompile Include="DocumentManager.cpp" />
+    <ClCompile Include="Data&amp;DocumentUtilities\DataManager.cpp" />
+    <ClCompile Include="Data&amp;DocumentUtilities\DocumentManager.cpp" />
+    <ClCompile Include="DatabaseConnection\DatabaseConnection.cpp" />
     <ClCompile Include="NewsCurator.cpp" />
-    <ClCompile Include="WebScrapperSpider.cpp" />
+    <ClCompile Include="WebSpider\WebScrapperSpider.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DatabaseConnection.h" />
-    <ClInclude Include="DataManager.h" />
-    <ClInclude Include="DocumentManager.h" />
-    <ClInclude Include="WebScrapperSpider.h" />
+    <ClInclude Include="Data&amp;DocumentUtilities\DataManager.h" />
+    <ClInclude Include="Data&amp;DocumentUtilities\DocumentManager.h" />
+    <ClInclude Include="DatabaseConnection\DatabaseConnection.h" />
+    <ClInclude Include="WebSpider\WebScrapperSpider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

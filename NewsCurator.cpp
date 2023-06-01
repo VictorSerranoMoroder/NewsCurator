@@ -2,7 +2,7 @@
 //
 
 #pragma once
-#include "DatabaseConnection.h"
+
 
 #include <cstdint>
 #include <iostream>
@@ -19,9 +19,10 @@
 
 #include <vector>
 
-#include "DocumentManager.h"
-#include "DataManager.h"
-#include "WebScrapperSpider.h"
+#include "DatabaseConnection/DatabaseConnection.h"
+#include "Data&DocumentUtilities/DocumentManager.h"
+#include "Data&DocumentUtilities/DataManager.h"
+#include "WebSpider/WebScrapperSpider.h"
 
 #include <iostream>
 #include <cstdlib>
