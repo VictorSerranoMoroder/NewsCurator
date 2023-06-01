@@ -49,8 +49,9 @@ void ShowWebMiningMenu()
             folders = DataManager::loadRawFolders();
             for (int i = 0; i < folders.size(); i++)
             {
-                std::cout << "Starting WebScraping Daemons..." << std::endl;
                 std::string folder = folders[i];
+                std::cout << "Starting WebScraping Daemon for: "+ folder << std::endl;
+                
                 try {
                     WebScrapperSpider spider(folder);
                     std::thread thread(spider);
