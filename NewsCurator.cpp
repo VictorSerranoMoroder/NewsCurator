@@ -39,13 +39,14 @@ void ShowWebMiningMenu()
 
         std::cout << "1. Start WebScrapping" << std::endl;
         std::cout << "2. Load RawData from WebScrapping" << std::endl;
-        std::cout << "3. Erase Raw Folder Contents" << std::endl;
+        std::cout << "3. Clear Database" << std::endl;
         std::cout << "0. Exit Program" << std::endl;
 
         std::cin >> option;
 
         if(option == 1)
         {
+            system("ResetRawFolders.bat");
             folders = DataManager::loadRawFolders();
             for (int i = 0; i < folders.size(); i++)
             {
@@ -69,7 +70,10 @@ void ShowWebMiningMenu()
         }
         else if (option == 3)
         {
-            system("ResetRawFolders.bat");
+            DatabaseConnection* dbCon = DatabaseConnection::getInstance();
+            bsoncxx::document::value filter = bsoncxx::builder::basic::make_document();
+            mongocxx::collection col = dbCon->getDatabase("NewsCurator").collection("TextDump");
+            col.delete_many(filter.view());
         }
 
 
