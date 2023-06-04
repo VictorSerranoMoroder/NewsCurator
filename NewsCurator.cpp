@@ -28,11 +28,91 @@
 #include <cstdlib>
 #include <windows.h>
 
+int countTxtFiles(std::string directoryPath) {
+    WIN32_FIND_DATAA findData;
+    HANDLE hFind;
+    int count = 0;
+
+    // Construct the search pattern
+    std::string searchPattern(directoryPath.c_str());
+    searchPattern += "\\*.txt";
+
+    // Start finding files
+    hFind = FindFirstFileA(searchPattern.c_str(), &findData);
+    if (hFind != INVALID_HANDLE_VALUE) {
+        do {
+            // Exclude directories and subdirectories
+            if (!(findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+                count++;
+        } while (FindNextFileA(hFind, &findData));
+        FindClose(hFind);
+    }
+
+    return count;
+}
+
+void MonitorMiningStatus(std::vector<std::string> folders)
+{
+    int option;
+
+    auto updateProgress = [](std::vector<std::string> folders)
+    {
+        int files = 0;
+        do
+        {
+            std::cout << "WebMining in Progress... Total Files: " << files << std::endl;
+            std::cout << "Press Enter to Stop" << std::endl;
+            files = 0;
+            
+            for (int i = 0; i < folders.size(); i++)
+            {
+                int count = countTxtFiles(folders[i]);
+                std::cout << "From " + folders[i] + ": " << std::to_string(count) << std::endl;
+                files += count;
+            }
+
+            system("cls");
+        } while (true);
+    };
+
+    std::thread thr(updateProgress,folders);
+    std::cin >> option;
+    thr.~thread();
+}
+
+void RunMiningThread(const std::string& folder)
+{
+    std::cout << "Starting WebScraping Daemon for: " + folder << std::endl;
+
+    try {
+        WebScrapperSpider spider(folder);
+        spider();
+    }
+    catch (const std::exception& xcp) {
+        std::cout << xcp.what() << std::endl;
+    }
+}
+
+void RunWebScrapping()
+{
+    std::vector<std::string> folders;
+    std::vector<std::thread> threadVector;
+    int option;
+
+    system("ResetRawFolders.bat");
+    folders = DataManager::loadRawFolders();
+    for (int i = 0; i < folders.size(); i++)
+    {
+        threadVector.emplace_back(std::thread(RunMiningThread, folders[i]));
+        Sleep(3000);
+    }
+    MonitorMiningStatus(folders);
+}
+
 void ShowWebMiningMenu() 
 {
     int option = 0;
-    std::vector<std::string> folders;
-    std::vector<std::thread> threadVector;
+
     do
     {
         std::cout << "WebMining Module Options..." << std::endl;
@@ -46,23 +126,7 @@ void ShowWebMiningMenu()
 
         if(option == 1)
         {
-            system("ResetRawFolders.bat");
-            folders = DataManager::loadRawFolders();
-            for (int i = 0; i < folders.size(); i++)
-            {
-                std::string folder = folders[i];
-                std::cout << "Starting WebScraping Daemon for: "+ folder << std::endl;
-                
-                try {
-                    WebScrapperSpider spider(folder);
-                    std::thread thread(spider);
-                    thread.detach();
-                    Sleep(3000);
-                }
-                catch (const std::exception& xcp) {
-                    std::cout << xcp.what() << std::endl;
-                }
-            }  
+            RunWebScrapping();
         }
         else if (option == 2)
         {
