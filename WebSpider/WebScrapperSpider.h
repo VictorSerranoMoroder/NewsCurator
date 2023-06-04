@@ -14,14 +14,16 @@ class WebScrapperSpider
 	private:
 		void startSpider();
 
-
+		std::string filePath;
 		const std::string webScrapperDirectory = "cd C:/Users/victo/Desktop/Proyectos/NewsCurator/WebScrapper ; ";
 		const std::string spiderInit = "scrapy crawl ";
-		std::string filePath;
+
 		std::map<std::string, std::string> spider_map = {
 			{ "raw20MIN", "20min_spider"},
 			{ "rawBBC", "bbc_spider"},
-			{ "rawDIARIO", "diario_spider"}
+			{ "rawDIARIO", "diario_spider"},
+			{ "rawCNN", "cnn_spider"},
+			{ "rawNYT", "nyt_spider"}
 		};
 		
 };

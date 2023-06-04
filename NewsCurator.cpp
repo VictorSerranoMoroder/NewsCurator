@@ -104,7 +104,7 @@ void RunWebScrapping()
     for (int i = 0; i < folders.size(); i++)
     {
         threadVector.emplace_back(std::thread(RunMiningThread, folders[i]));
-        Sleep(3000);
+        Sleep(1000);
     }
     MonitorMiningStatus(folders);
 }
