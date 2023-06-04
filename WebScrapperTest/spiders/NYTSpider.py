@@ -40,7 +40,7 @@ class ScrappySpider(scrapy.Spider):
 
         self.counter = self.counter + 1
         save_path = 'C:/Users/victo/Desktop/Proyectos/NewsCurator/rawFolders/rawNYT'
-        completeNametxt = os.path.join(save_path, "rawBBC"+str(self.counter)+".txt")
+        completeNametxt = os.path.join(save_path, "rawNYT"+str(self.counter)+".txt")
         with open(completeNametxt, 'w', encoding='utf-8') as f:
             f.write(url + '\n')
             f.write(website_text.strip() + '\n')
