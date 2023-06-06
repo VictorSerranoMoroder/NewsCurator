@@ -34,7 +34,7 @@ class ScrappySpider(scrapy.Spider):
         # For example, let's follow links to the next pages in a pagination
         links = response.css('a::attr(href)').getall()
         for link in links:
-            if ("https://www.20minutos.es/internacional/" in link):
+            if ("https://www.20minutos.es/internacional/" in link or "https://www.20minutos.es/noticia" in link):
                 yield response.follow(link, self.parse)
 
     
