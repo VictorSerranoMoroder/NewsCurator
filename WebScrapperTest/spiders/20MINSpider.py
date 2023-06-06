@@ -9,6 +9,10 @@ class ScrappySpider(scrapy.Spider):
         'https://www.20minutos.es/internacional/'
     ]
 
+    custom_settings = {
+        'CLOSESPIDER_TIMEOUT': 1200  
+    }
+
     def parse(self, response):
         
         # Extract the whole website text using Beautiful Soup

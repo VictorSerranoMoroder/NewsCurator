@@ -9,6 +9,10 @@ class ScrappySpider(scrapy.Spider):
         'https://edition.cnn.com/world'
     ]
 
+    custom_settings = {
+        'CLOSESPIDER_TIMEOUT': 1200  
+    }
+
     def parse(self, response):
         
         # Extract the whole website text using Beautiful Soup

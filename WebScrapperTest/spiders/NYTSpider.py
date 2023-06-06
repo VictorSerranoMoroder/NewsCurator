@@ -9,6 +9,10 @@ class ScrappySpider(scrapy.Spider):
         'https://www.nytimes.com/international/section/world'
     ]
 
+    custom_settings = {
+        'CLOSESPIDER_TIMEOUT': 1200  
+    }
+
     def parse(self, response):
         
         # Extract the whole website text using Beautiful Soup

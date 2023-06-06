@@ -8,6 +8,9 @@ class ScrappySpider(scrapy.Spider):
     start_urls = [
         'https://www.eldiario.es/internacional/'
     ]
+    custom_settings = {
+        'CLOSESPIDER_TIMEOUT': 1200  
+    }
 
     def parse(self, response):
         

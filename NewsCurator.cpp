@@ -51,17 +51,18 @@ int countTxtFiles(std::string directoryPath) {
     return count;
 }
 
-void MonitorMiningStatus(std::vector<std::string> folders)
+void MonitorMiningStatus(std::vector<std::string> folders, std::vector<std::thread>* threadVector)
 {
     int option;
+    std::atomic<bool> terminateThread = false;
 
-    auto updateProgress = [](std::vector<std::string> folders)
+    auto updateProgress = [](std::vector<std::string> folders, std::atomic<bool>* terminateThread)
     {
         int files = 0;
         do
         {
+            system("cls");
             std::cout << "WebMining in Progress... Total Files: " << files << std::endl;
-            std::cout << "Press Enter to Stop" << std::endl;
             files = 0;
             
             for (int i = 0; i < folders.size(); i++)
@@ -71,13 +72,17 @@ void MonitorMiningStatus(std::vector<std::string> folders)
                 files += count;
             }
 
-            system("cls");
-        } while (true);
+            
+        } while (!*terminateThread);
     };
 
-    std::thread thr(updateProgress,folders);
-    std::cin >> option;
-    thr.~thread();
+    std::thread thr(updateProgress,folders,&terminateThread);
+    for (int i = 0; i < threadVector->size(); i++)
+        threadVector->at(i).join();
+
+    terminateThread = true;
+    thr.join();
+    system("pause");
 }
 
 void RunMiningThread(const std::string& folder)
@@ -96,17 +101,17 @@ void RunMiningThread(const std::string& folder)
 void RunWebScrapping()
 {
     std::vector<std::string> folders;
-    std::vector<std::thread> threadVector;
+    std::vector<std::thread> threadVector;    
     int option;
 
-    system("ResetRawFolders.bat");
-    folders = DataManager::loadRawFolders();
-    for (int i = 0; i < folders.size(); i++)
-    {
-        threadVector.emplace_back(std::thread(RunMiningThread, folders[i]));
-        Sleep(1000);
-    }
-    MonitorMiningStatus(folders);
+        system("ResetRawFolders.bat");
+        folders = DataManager::loadRawFolders();
+        for (int i = 0; i < folders.size(); i++)
+        {
+            threadVector.emplace_back(std::thread(RunMiningThread, folders[i]));
+            Sleep(1000);
+        }
+        MonitorMiningStatus(folders, &threadVector);
 }
 
 void ShowWebMiningMenu() 
