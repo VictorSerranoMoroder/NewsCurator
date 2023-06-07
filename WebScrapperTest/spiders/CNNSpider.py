@@ -10,7 +10,8 @@ class ScrappySpider(scrapy.Spider):
     ]
 
     custom_settings = {
-        'CLOSESPIDER_TIMEOUT': 1200  
+        'CLOSESPIDER_TIMEOUT': 1200,
+        'CLOSESPIDER_IDLE_TIMEOUT': 60   
     }
 
     def parse(self, response):
