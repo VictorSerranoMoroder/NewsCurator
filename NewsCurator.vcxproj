@@ -132,12 +132,14 @@
     <ClCompile Include="Data&amp;DocumentUtilities\DocumentManager.cpp" />
     <ClCompile Include="DatabaseConnection\DatabaseConnection.cpp" />
     <ClCompile Include="NewsCurator.cpp" />
+    <ClCompile Include="WebMiningManager.cpp" />
     <ClCompile Include="WebSpider\WebScrapperSpider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data&amp;DocumentUtilities\DataManager.h" />
     <ClInclude Include="Data&amp;DocumentUtilities\DocumentManager.h" />
     <ClInclude Include="DatabaseConnection\DatabaseConnection.h" />
+    <ClInclude Include="WebMiningManager.h" />
     <ClInclude Include="WebSpider\WebScrapperSpider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
