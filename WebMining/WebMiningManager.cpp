@@ -17,9 +17,8 @@
 
 #include <vector>
 
-#include "DatabaseConnection/DatabaseConnection.h"
-#include "Data&DocumentUtilities/DocumentManager.h"
-#include "Data&DocumentUtilities/DataManager.h"
+#include "../Data&DocumentUtilities/DataManager.h"
+#include "../DatabaseConnection/DatabaseConnection.h"
 #include "WebSpider/WebScrapperSpider.h"
 
 #include <iostream>

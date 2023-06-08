@@ -27,10 +27,10 @@
     <ClCompile Include="Data&amp;DocumentUtilities\DocumentManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="WebSpider\WebScrapperSpider.cpp">
+    <ClCompile Include="WebMining\WebMiningManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="WebMiningManager.cpp">
+    <ClCompile Include="WebMining\WebSpider\WebScrapperSpider.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +44,10 @@
     <ClInclude Include="Data&amp;DocumentUtilities\DocumentManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="WebSpider\WebScrapperSpider.h">
+    <ClInclude Include="WebMining\WebMiningManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="WebMiningManager.h">
+    <ClInclude Include="WebMining\WebSpider\WebScrapperSpider.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
