@@ -59,10 +59,13 @@ void WebMiningManager::MonitorMiningStatus(std::vector<std::string> folders, std
     auto updateProgress = [](std::vector<std::string> folders, std::atomic<bool>* terminateThread)
     {
         int files = 0;
+        int prevTotal = 0;
         do
         {
             system("cls");
             std::cout << "WebMining in Progress... Total Files: " << totalFiles + files << std::endl;
+            std::cout << "Mining Rate (Pages/sec): " << totalFiles + files - prevTotal << std::endl;
+            prevTotal = totalFiles + files;
             files = 0;
 
             for (int i = 0; i < folders.size(); i++)
@@ -71,7 +74,7 @@ void WebMiningManager::MonitorMiningStatus(std::vector<std::string> folders, std
                 std::cout << "From " + folders[i] + ": " << std::to_string(count) << std::endl;
                 files += count;
             }
-            Sleep(200);
+            Sleep(1000);
 
         } while (!*terminateThread);
         totalFiles += files;

@@ -23,7 +23,11 @@ class WebScrapperSpider
 			{ "rawBBC", "bbc_spider"},
 			{ "rawDIARIO", "diario_spider"},
 			{ "rawCNN", "cnn_spider"},
-			{ "rawNYT", "nyt_spider"}
+			{ "rawNYT", "nyt_spider"},
+			{ "rawGUA", "gua_spider"},
+			{ "rawHUF", "huf_spider"},
+			{ "rawREU", "reu_spider"},
+			{ "rawWSJ", "wsj_spider"}
 		};
 		
 };
