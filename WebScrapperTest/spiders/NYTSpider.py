@@ -4,14 +4,14 @@ from bs4 import BeautifulSoup
 
 class ScrappySpider(scrapy.Spider):
     counter = 0
-    name = "bbc_spider"
+    name = "nyt_spider"
     start_urls = [
-        'https://www.bbc.com/news/world'
+        'https://www.nytimes.com/international/section/world'
     ]
 
     custom_settings = {
         'CLOSESPIDER_TIMEOUT': 1200,
-        'CLOSESPIDER_IDLE_TIMEOUT': 60 
+        'CLOSESPIDER_IDLE_TIMEOUT': 60   
     }
 
     def parse(self, response):
@@ -35,7 +35,7 @@ class ScrappySpider(scrapy.Spider):
         # For example, let's follow links to the next pages in a pagination
         links = response.css('a::attr(href)').getall()
         for link in links:
-            if ("/news/world" in link):
+            if ("www.nytimes.com" in link):
                 yield response.follow(link, self.parse)
 
     
@@ -44,8 +44,8 @@ class ScrappySpider(scrapy.Spider):
         # For example, save it to a file or a database
 
         self.counter = self.counter + 1
-        save_path = 'C:/Users/victo/Desktop/Proyectos/NewsCurator/rawFolders/rawBBC'
-        completeNametxt = os.path.join(save_path, "rawBBC"+str(self.counter)+".txt")
+        save_path = 'C:/Users/victo/Desktop/Proyectos/NewsCurator/rawFolders/rawNYT'
+        completeNametxt = os.path.join(save_path, "rawNYT"+str(self.counter)+".txt")
         with open(completeNametxt, 'w', encoding='utf-8') as f:
             f.write(url + '\n')
             f.write(website_text.strip() + '\n')

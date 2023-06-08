@@ -6,6 +6,10 @@ cd ../rawBBC
 del *.txt
 cd ../rawDIARIO
 del *.txt
+cd ../rawCNN
+del *.txt
+cd ../rawNYT
+del *.txt
 cd ../../
 echo "Done"
 pause

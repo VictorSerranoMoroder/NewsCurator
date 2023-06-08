@@ -1,7 +1,8 @@
+#pragma once
 #include "DataManager.h"
-#include "DatabaseConnection.h"
-#include "DataManager.h"
-#include "DocumentManager.h"
+
+#include "../Data&DocumentUtilities/DocumentManager.h"
+#include "../DatabaseConnection/DatabaseConnection.h"
 
 #include <iostream>
 #include <fstream>

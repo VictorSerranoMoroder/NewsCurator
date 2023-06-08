@@ -18,30 +18,36 @@
     <ClCompile Include="NewsCurator.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="DatabaseConnection.cpp">
+    <ClCompile Include="DatabaseConnection\DatabaseConnection.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="DocumentManager.cpp">
+    <ClCompile Include="Data&amp;DocumentUtilities\DataManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="DataManager.cpp">
+    <ClCompile Include="Data&amp;DocumentUtilities\DocumentManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="WebScrapperSpider.cpp">
+    <ClCompile Include="WebMining\WebMiningManager.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="WebMining\WebSpider\WebScrapperSpider.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DatabaseConnection.h">
+    <ClInclude Include="DatabaseConnection\DatabaseConnection.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="DocumentManager.h">
+    <ClInclude Include="Data&amp;DocumentUtilities\DataManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="DataManager.h">
+    <ClInclude Include="Data&amp;DocumentUtilities\DocumentManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="WebScrapperSpider.h">
+    <ClInclude Include="WebMining\WebMiningManager.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="WebMining\WebSpider\WebScrapperSpider.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

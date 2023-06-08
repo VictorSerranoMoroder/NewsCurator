@@ -1,11 +1,5 @@
 #include "WebScrapperSpider.h"
 #include <string>
-#include <thread>
-#include <vector>
-#include "DataManager.h"
-
-#include <iostream>
-
 
 WebScrapperSpider::WebScrapperSpider(std::string filePath)
 {

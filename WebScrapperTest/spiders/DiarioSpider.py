@@ -8,6 +8,11 @@ class ScrappySpider(scrapy.Spider):
     start_urls = [
         'https://www.eldiario.es/internacional/'
     ]
+    
+    custom_settings = {
+        'CLOSESPIDER_TIMEOUT': 1200,
+        'CLOSESPIDER_IDLE_TIMEOUT': 60   
+    }
 
     def parse(self, response):
         
@@ -21,20 +26,20 @@ class ScrappySpider(scrapy.Spider):
                 else:
                     website_text += char
         ##website_text = soup.get_text(separator=' ')
-        website_html = response.body.decode()
+        #website_html = response.body.decode()
 
         # Do something with the extracted data (e.g., save it to a file or a database)
-        self.save_data(response.url, website_text, website_html)
+        self.save_data(response.url, website_text)
 
         # Follow links to other pages if needed
         # For example, let's follow links to the next pages in a pagination
         links = response.css('a::attr(href)').getall()
         for link in links:
-            if ("internacional/" in link):
+            if ("https://www.eldiario.es/internacional/" in link):
                 yield response.follow(link, self.parse)
 
     
-    def save_data(self, url, website_text, website_html):
+    def save_data(self, url, website_text):
         # Implement your logic to save the data here
         # For example, save it to a file or a database
 
