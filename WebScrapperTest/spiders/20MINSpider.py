@@ -15,6 +15,11 @@ class ScrappySpider(scrapy.Spider):
         'CLOSESPIDER_IDLE_TIMEOUT': 60
     }
 
+    def __init__(self, *args, **kwargs):
+        super(ScrappySpider, self).__init__(*args, **kwargs)
+        self.start_time = time.time()
+
+
     def parse(self, response):
         
         # Extract the whole website text using Beautiful Soup
@@ -40,7 +45,7 @@ class ScrappySpider(scrapy.Spider):
         # For example, let's follow links to the next pages in a pagination
         links = response.css('a::attr(href)').getall()
         for link in links:
-            if ("https://www.20minutos.es/internacional/" in link or "https://www.20minutos.es/noticia" in link):
+            if ("20minutos.es/internacional/" in link or "20minutos.es/noticia" in link):
                 yield response.follow(link, self.parse)
 
     
