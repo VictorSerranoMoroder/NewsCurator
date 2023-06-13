@@ -21,7 +21,7 @@ bsoncxx::document::value DocumentManager::CreateDocument(std::string input)
     std::string txt = input.substr(input.find_first_of('\n')+1, input.length());
 
     bsoncxx::document::value docValue = make_document(
-        kvp("Web_URL_text", url),
+        kvp("Web_URL", url),
         kvp("Web_Text", txt)
     );
     

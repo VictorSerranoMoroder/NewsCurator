@@ -25,7 +25,6 @@
 #include <cstdlib>
 #include <windows.h>
 
-const int TUPPLE_SIZE = 5;
 int totalFiles = 0;
 
 int WebMiningManager::countTxtFiles(std::string directoryPath) {

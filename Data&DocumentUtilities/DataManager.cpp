@@ -67,7 +67,10 @@ void DataManager::loadDocumentToDatabase(bsoncxx::document::value document)
     {
         mongocxx::collection col = DatabaseConnection::getInstance()->getDatabase("NewsCurator")
             .collection("TextDump");
-        col.insert_one(std::move(document));
+
+        auto result = col.find_one(document.view());
+        if (!result.has_value())
+            col.insert_one(std::move(document));
         
     }
     catch (const std::exception xcp)
