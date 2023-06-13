@@ -6,7 +6,6 @@ class DataManager
 {
 	public:
 		static void loadDataFromRaw();
-		static std::vector<std::string> loadRawFolders();
 
 	private:
 		static void readFilesInDirectory(const std::string& directoryPath);

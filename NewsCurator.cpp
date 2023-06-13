@@ -10,8 +10,6 @@
 
 #include "WebMining/WebMiningManager.h"
 
-
-
 int main()
 {
     try

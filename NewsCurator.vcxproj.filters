@@ -33,11 +33,11 @@
     <ClCompile Include="WebMining\WebSpider\WebScrapperSpider.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="WindowsUtilities\WindowsUtilities.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DatabaseConnection\DatabaseConnection.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Data&amp;DocumentUtilities\DataManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -48,6 +48,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="WebMining\WebSpider\WebScrapperSpider.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="DatabaseConnection\DatabaseConnection.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsUtilities\WindowsUtilities.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

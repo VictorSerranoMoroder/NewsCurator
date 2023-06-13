@@ -25,7 +25,7 @@ class WebMiningManager
 		WebMiningManager();
 		static WebMiningManager* webminingmanager_;
 
-		const int TUPPLE_SIZE = 5;
+		const int TUPPLE_SIZE = 8;
 		
 
 };

@@ -10,6 +10,14 @@ cd ../rawCNN
 del *.txt
 cd ../rawNYT
 del *.txt
+cd ../rawGUA
+del *.txt
+cd ../rawHUF
+del *.txt
+cd ../rawREU
+del *.txt
+cd ../rawWSJ
+del *.txt
 cd ../../
 echo "Done"
 pause

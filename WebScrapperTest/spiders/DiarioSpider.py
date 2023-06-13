@@ -1,5 +1,6 @@
 import os
 import scrapy
+import time
 from bs4 import BeautifulSoup
 
 class ScrappySpider(scrapy.Spider):
@@ -11,8 +12,12 @@ class ScrappySpider(scrapy.Spider):
     
     custom_settings = {
         'CLOSESPIDER_TIMEOUT': 1200,
-        'CLOSESPIDER_IDLE_TIMEOUT': 60   
+        'CLOSESPIDER_IDLE_TIMEOUT': 60
     }
+
+    def __init__(self, *args, **kwargs):
+        super(ScrappySpider, self).__init__(*args, **kwargs)
+        self.start_time = time.time()
 
     def parse(self, response):
         
@@ -30,6 +35,10 @@ class ScrappySpider(scrapy.Spider):
 
         # Do something with the extracted data (e.g., save it to a file or a database)
         self.save_data(response.url, website_text)
+
+        # Check if the timeout duration has been reached
+        if time.time() - self.start_time >= 1200: 
+            self.crawler.engine.close_spider(self, "Timeout reached")
 
         # Follow links to other pages if needed
         # For example, let's follow links to the next pages in a pagination

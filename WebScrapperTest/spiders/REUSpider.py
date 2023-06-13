@@ -5,20 +5,19 @@ from bs4 import BeautifulSoup
 
 class ScrappySpider(scrapy.Spider):
     counter = 0
-    name = "20min_spider"
+    name = "reu_spider"
     start_urls = [
-        'https://www.20minutos.es/internacional/'
+        'https://www.reuters.com/world/'
     ]
 
     custom_settings = {
         'CLOSESPIDER_TIMEOUT': 1200,
-        'CLOSESPIDER_IDLE_TIMEOUT': 60
+        'CLOSESPIDER_IDLE_TIMEOUT': 60  
     }
 
     def __init__(self, *args, **kwargs):
         super(ScrappySpider, self).__init__(*args, **kwargs)
         self.start_time = time.time()
-
 
     def parse(self, response):
         
@@ -45,7 +44,7 @@ class ScrappySpider(scrapy.Spider):
         # For example, let's follow links to the next pages in a pagination
         links = response.css('a::attr(href)').getall()
         for link in links:
-            if ("20minutos.es/internacional/" in link or "20minutos.es/noticia" in link):
+            if ("reuters.com/world/" in link):
                 yield response.follow(link, self.parse)
 
     
@@ -54,8 +53,8 @@ class ScrappySpider(scrapy.Spider):
         # For example, save it to a file or a database
 
         self.counter = self.counter + 1
-        save_path = 'C:/Users/victo/Desktop/Proyectos/NewsCurator/rawFolders/raw20MIN'
-        completeNametxt = os.path.join(save_path, "raw20MIN"+str(self.counter)+".txt")
+        save_path = 'C:/Users/victo/Desktop/Proyectos/NewsCurator/rawFolders/rawNYT'
+        completeNametxt = os.path.join(save_path, "rawNYT"+str(self.counter)+".txt")
         with open(completeNametxt, 'w', encoding='utf-8') as f:
             f.write(url + '\n')
             f.write(website_text.strip() + '\n')

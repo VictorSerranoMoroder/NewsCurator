@@ -3,6 +3,7 @@
 
 #include "../Data&DocumentUtilities/DocumentManager.h"
 #include "../DatabaseConnection/DatabaseConnection.h"
+#include "../WindowsUtilities/WindowsUtilities.h"
 
 #include <iostream>
 #include <fstream>
@@ -12,7 +13,7 @@
 
 void DataManager::loadDataFromRaw()
 {
-    std::vector<std::string> directoryPaths = loadRawFolders();
+    std::vector<std::string> directoryPaths = WindowsUtilities::loadRawFolders();
 
     for (int i = 0; i < directoryPaths.size(); i++)
     {
@@ -67,7 +68,10 @@ void DataManager::loadDocumentToDatabase(bsoncxx::document::value document)
     {
         mongocxx::collection col = DatabaseConnection::getInstance()->getDatabase("NewsCurator")
             .collection("TextDump");
-        col.insert_one(std::move(document));
+
+        auto result = col.find_one(document.view());
+        if (!result.has_value())
+            col.insert_one(std::move(document));
         
     }
     catch (const std::exception xcp)
@@ -75,36 +79,4 @@ void DataManager::loadDocumentToDatabase(bsoncxx::document::value document)
         std::cout << xcp.what() << std::endl;
         return;
     }
-}
-
-std::vector<std::string> DataManager::loadRawFolders()
-{
-    std::string directoryPath = "C:/Users/victo/Desktop/Proyectos/NewsCurator/rawFolders/";
-    std::vector<std::string> rawFolderPaths;
-
-    std::wstring wideDirectoryPath(directoryPath.begin(), directoryPath.end());
-    std::wstring searchPath = wideDirectoryPath + L"\\*";
-    WIN32_FIND_DATA fileInfo;
-    HANDLE searchHandle = FindFirstFile(searchPath.c_str(), &fileInfo);
-
-    if (searchHandle != INVALID_HANDLE_VALUE) {
-        do {
-            if (fileInfo.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-                std::wstring wideFolderName(fileInfo.cFileName);
-                std::string folderName(wideFolderName.begin(), wideFolderName.end());
-
-                if (folderName.substr(0, 3) == "raw") {
-                    std::string folderPath = directoryPath + folderName;
-                    rawFolderPaths.push_back(folderPath);
-                }
-            }
-        } while (FindNextFile(searchHandle, &fileInfo));
-
-        FindClose(searchHandle);
-    }
-    else {
-        std::cerr << "Error opening directory: " << directoryPath << std::endl;
-    }
-
-    return rawFolderPaths;
 }
