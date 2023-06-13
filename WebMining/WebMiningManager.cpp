@@ -20,35 +20,13 @@
 #include "../Data&DocumentUtilities/DataManager.h"
 #include "../DatabaseConnection/DatabaseConnection.h"
 #include "WebSpider/WebScrapperSpider.h"
+#include "../WindowsUtilities/WindowsUtilities.h"
 
 #include <iostream>
 #include <cstdlib>
 #include <windows.h>
 
 int totalFiles = 0;
-
-int WebMiningManager::countTxtFiles(std::string directoryPath) {
-    WIN32_FIND_DATAA findData;
-    HANDLE hFind;
-    int count = 0;
-
-    // Construct the search pattern
-    std::string searchPattern(directoryPath.c_str());
-    searchPattern += "\\*.txt";
-
-    // Start finding files
-    hFind = FindFirstFileA(searchPattern.c_str(), &findData);
-    if (hFind != INVALID_HANDLE_VALUE) {
-        do {
-            // Exclude directories and subdirectories
-            if (!(findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
-                count++;
-        } while (FindNextFileA(hFind, &findData));
-        FindClose(hFind);
-    }
-
-    return count;
-}
 
 void WebMiningManager::MonitorMiningStatus(std::vector<std::string> folders, std::vector<std::thread>* threadVector)
 {
@@ -69,7 +47,7 @@ void WebMiningManager::MonitorMiningStatus(std::vector<std::string> folders, std
 
             for (int i = 0; i < folders.size(); i++)
             {
-                int count = countTxtFiles(folders[i]);
+                int count = WindowsUtilities::countTxtFiles(folders[i]);
                 std::cout << "From " + folders[i] + ": " << std::to_string(count) << std::endl;
                 files += count;
             }
@@ -129,7 +107,7 @@ void WebMiningManager::RunWebScrapping()
     int option;
 
     system("ResetRawFolders.bat");
-    folders = DataManager::loadRawFolders();
+    folders = WindowsUtilities::loadRawFolders();
     for (int tupple = 0; folders.size() > 0; tupple++)
     {
         threadVector.clear();
