@@ -1,6 +1,6 @@
-#include "WebMiningManager.h"
-#pragma once
 
+#pragma once
+#include "WebMiningManager.h"
 
 #include <cstdint>
 #include <iostream>
