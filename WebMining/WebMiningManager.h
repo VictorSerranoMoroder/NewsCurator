@@ -20,7 +20,6 @@ class WebMiningManager
 		std::vector<std::string> getFoldersToProcess(std::vector<std::string>* folders);
 		void RunMiningThread(const std::string& folder);
 		void MonitorMiningStatus(std::vector<std::string> folders, std::vector<std::thread>* threadVector);
-		static int countTxtFiles(std::string directoryPath);
 
 		WebMiningManager();
 		static WebMiningManager* webminingmanager_;
