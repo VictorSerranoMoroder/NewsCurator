@@ -19,5 +19,6 @@ class DocumentManager
 {
     public:
         static bsoncxx::document::value CreateDocument(std::string input); 
+        static bool valueDuplicatedInCollection(mongocxx::collection coll, std::string nameField, std::string fieldValue);
 };
 
