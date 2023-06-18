@@ -27,3 +27,21 @@ bsoncxx::document::value DocumentManager::CreateDocument(std::string input)
     
     return docValue;
 }
+
+bool DocumentManager::valueDuplicatedInCollection(mongocxx::collection coll, std::string nameField, std::string fieldValue)
+{
+    bsoncxx::builder::basic::document query_builder{};
+    query_builder.append(bsoncxx::builder::basic::kvp(nameField, fieldValue));
+
+    bsoncxx::document::value query = query_builder.extract();
+
+
+    if (coll.find_one(query.view()))
+        return true;
+    else
+        return false;
+
+    return false;
+}
+
+

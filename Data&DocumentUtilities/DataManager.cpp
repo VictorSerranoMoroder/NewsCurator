@@ -43,7 +43,7 @@ void DataManager::readFilesInDirectory(const std::string& directoryPath) {
                         std::string fileContent((std::istreambuf_iterator<char>(file)),
                             std::istreambuf_iterator<char>());
                         std::cout << "Loading " + filePath << std::endl;
-                        DataManager::loadDocumentToDatabase(DocumentManager::CreateDocument(fileContent));
+                        DataManager::loadDocumentToDatabase(DocumentManager::CreateDocument(fileContent), "NewsCurator", "TextDump");
                         file.close();
                     }
                     else {
@@ -62,15 +62,14 @@ void DataManager::readFilesInDirectory(const std::string& directoryPath) {
     return;
 }
 
-void DataManager::loadDocumentToDatabase(bsoncxx::document::value document)
+void DataManager::loadDocumentToDatabase(bsoncxx::document::value document, std::string databaseName, std::string collectionName)
 {
     try
     {
-        mongocxx::collection col = DatabaseConnection::getInstance()->getDatabase("NewsCurator")
-            .collection("TextDump");
+        mongocxx::collection col = DatabaseConnection::getInstance()->getDatabase(databaseName)
+            .collection(collectionName);
 
-        auto result = col.find_one(document.view());
-        if (!result.has_value())
+        if (!DocumentManager::valueDuplicatedInCollection(col, "Web_URL", std::string(document["Web_URL"].get_string().value)))
             col.insert_one(std::move(document));
         
     }

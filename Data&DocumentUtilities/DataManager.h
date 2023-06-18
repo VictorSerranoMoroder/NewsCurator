@@ -9,7 +9,7 @@ class DataManager
 
 	private:
 		static void readFilesInDirectory(const std::string& directoryPath);
-		static void loadDocumentToDatabase(bsoncxx::document::value document);
+		static void loadDocumentToDatabase(bsoncxx::document::value document, std::string databaseName, std::string collectionName);
 
 };
 
